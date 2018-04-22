@@ -7,9 +7,7 @@ function adjustHeight() {
 function clearNotes() {
 	chrome.storage.local.clear(function() {
 	    var error = chrome.runtime.lastError;
-	    if (error) {
-	        console.error(error);
-	    }
+	    if (error) console.error(error);
 	});
 }
 
@@ -17,9 +15,7 @@ $(document).ready(function() {
 
 	// TRIGGERING BUTTON
 	$("#input_note").keyup(function(event) {
-	    if (event.keyCode === 13) {
-	        $("#add").click();
-	    }
+	    if (event.keyCode === 13) $("#add").click();
 	});
 
 	// CLEAR NOTES
@@ -48,9 +44,7 @@ $(document).ready(function() {
 		};
 	    for (var i = 0; i < bookmarks.length; i++) {
 	        var bookmark = bookmarks[i];
-	        if (bookmark.url) {
-	        	$('#bookmarks').append("<a href='"+bookmark.url+"'>"+ bookmark.title.trunc(15)+"</a>")
-	        }
+	        if (bookmark.url) $('#bookmarks').append("<a href='"+bookmark.url+"'>"+ bookmark.title.trunc(15)+"</a>")
 	    }
 	}
 	chrome.bookmarks.getChildren( '1', process_bookmark );
@@ -114,12 +108,8 @@ document.body.onload = function() {
 	}
 	function DB_load(callback) {
 		chrome.storage.local.get(gDataName, function(r) {
-			if (isEmpty(r[gDataName])) {
-				DB_setValue(gDataName, gData, callback);
-			}
-			else if (r[gDataName].dataVersion != gData.dataVersion) {
-				DB_setValue(gDataName, gData, callback);
-			}
+			if (isEmpty(r[gDataName])) DB_setValue(gDataName, gData, callback);
+			else if (r[gDataName].dataVersion != gData.dataVersion) DB_setValue(gDataName, gData, callback);
 			else {
 				gData = r[gDataName];
 				callback();
@@ -145,12 +135,8 @@ document.body.onload = function() {
 	}
 	DB_load(function() {
 		for (var i = 0; i < gData.villages.length; i++) {
-			if (gData.villages[i].stat.toString() != 'arc') {
-				$('#'+notes_container).prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option arc">Archive</button></div></div><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
-			}
-			else {
-				$('#'+notes_container).prepend('<div class="note archived"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option unarc">Unarchive</button></div></div><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
-			}
+			if (gData.villages[i].stat.toString() != 'arc') $('#'+notes_container).prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option arc">Archive</button></div></div><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+			else $('#'+notes_container).prepend('<div class="note archived"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option unarc">Unarchive</button></div></div><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
 		}
 		adjustHeight();
 		noteStat();
@@ -165,26 +151,20 @@ document.body.onload = function() {
 					adjustHeight();
 				}, 650);
 				for (var i = 0; i < gData.villages.length; i++) {
-					if (gData.villages[i].id === noteId) {
-						gData.villages.splice(i, 1);
-					}
+					if (gData.villages[i].id === noteId) gData.villages.splice(i, 1);
 				}
 			}
 			else if($(this).hasClass('arc')) {
 				$(this).html('Unarchive').removeClass('arc');
 				for (var i = 0; i < gData.villages.length; i++) {
-					if (gData.villages[i].id === noteId) {
-						gData.villages[i].stat = 'arc';
-					}
+					if (gData.villages[i].id === noteId) gData.villages[i].stat = 'arc';
 				}
 				$(this).closest('.note').find('p').not('.time').css('text-decoration', 'line-through');
 			}
 			else {
 				$(this).html('Archive').addClass('arc');
 				for (var i = 0; i < gData.villages.length; i++) {
-					if (gData.villages[i].id === noteId) {
-						gData.villages[i].stat = 'init';
-					}
+					if (gData.villages[i].id === noteId) gData.villages[i].stat = 'init';
 				}
 				$(this).closest('.note').find('p').not('.time').css('text-decoration', 'unset');
 			}
