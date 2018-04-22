@@ -72,7 +72,7 @@ document.body.onload = function() {
 				{id: randval, time: time, name: note}
 			);
 			DB_save();
-			$('#'+notes_container).append('<div class="note"><p>'+ note +'<p class="time">'+ time +'</p></p></div>');
+			$('#'+notes_container).append('<div class="note"><id id="'+ randval +'"></id><p>'+ note +'<p class="time">'+ time +'</p></p></div>');
 			$('#input_note').val('').focus();
 		}
 		adjustHeight();
@@ -119,8 +119,7 @@ document.body.onload = function() {
 	}
 	DB_load(function() {
 		for (var i = 0; i < gData.villages.length; i++) {
-			$('#'+notes_container).append('<div class="note"><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + ' - ' + gData.villages[i].id +'</p></p></div>');
-			// console.log(gData.villages[i].id + ' / ' + gData.villages[i].time + ' / ' + gData.villages[i].name);
+			$('#'+notes_container).append('<div class="note"><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
 		}
 		adjustHeight();
 		delNote();
@@ -131,8 +130,6 @@ document.body.onload = function() {
 			setTimeout(function() {
 				adjustHeight();
 			}, 650);
-			console.log($(this).find('id').attr('id'));
-			// gData.villages.pop({ id: $(this).find('id').attr('id') });
 			for (var i = 0; i < gData.villages.length; i++) {
 				if (gData.villages[i].id === parseInt($(this).find('id').attr('id'))) {
 					gData.villages.splice(i, 1);
