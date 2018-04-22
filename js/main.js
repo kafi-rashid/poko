@@ -15,6 +15,13 @@ function clearNotes() {
 
 $(document).ready(function() {
 
+	// TRIGGERING BUTTON
+	$("#input_note").keyup(function(event) {
+	    if (event.keyCode === 13) {
+	        $("#add").click();
+	    }
+	});
+
 	// CLEAR NOTES
 	$('#clear').click(function() {
 		$('.note').each(function() {
@@ -42,7 +49,7 @@ $(document).ready(function() {
 	    for (var i = 0; i < bookmarks.length; i++) {
 	        var bookmark = bookmarks[i];
 	        if (bookmark.url) {
-	        	$('#bookmarks').append("<a href='"+bookmark.url+"'>"+ bookmark.title.trunc(10)+"</a>")
+	        	$('#bookmarks').append("<a href='"+bookmark.url+"'>"+ bookmark.title.trunc(15)+"</a>")
 	        }
 	    }
 	}

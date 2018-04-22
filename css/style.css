@@ -52,14 +52,15 @@ body {
 }
 .blur {
 	border: thin dashed red;
-	background-image: url('../images/unsplash.jpg');
-	background-image: url('https://source.unsplash.com/collection/2013372/1920x1080'), url('../images/unsplash.jpg');
+	background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('../images/unsplash.jpg');
+	background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('https://source.unsplash.com/collection/2013372/1920x1080'), url('../images/unsplash.jpg');
 	background-repeat: no-repeat;
-	background-position: calc(50% - 8px) calc(50% + 55px);
+	background-position: calc(50% + 2px) calc(50% + 20px);
 	background-size: cover;
 	background-attachment: fixed;
 	overflow: hidden;
-	filter: blur(10px) grayscale(0%) brightness(150%) sepia(30%);
+	filter: blur(10px) grayscale(0%) brightness(150%) sepia(0%);
+	/*filter: blur(10px);*/
 	position: absolute;
 	margin: -30px;
 	height: calc(100% + 60px) !important;
@@ -179,7 +180,7 @@ a {
 	overflow: scroll;
 }
 #add_note {
-	margin-top: -18px;
+	margin-top: -17px;
 	width: 100%;
 }
 .mCSB_inside > .mCSB_container {
@@ -194,7 +195,7 @@ a {
 	cursor: pointer;
 	background-color: rgba(0, 0, 0, 0.4);
 	margin-bottom: 1px;
-	padding: 10px;
+	padding: 20px;
 	overflow: hidden;
 }
 .note:first-of-type {
@@ -216,7 +217,7 @@ a {
 	outline: none;
 	margin-top: 1px;
 	font-weight: 100;
-	padding: 10px;
+	padding: 15px;
 	border: none;
 	background-color: rgba(0, 0, 0, 0.6);
 	min-height: 65px;
@@ -237,10 +238,12 @@ a {
 	background-color: rgba(0, 0, 0, 1);
 }
 .time {
-	margin-top: 10px;
+	margin: 10px 0 0 0;
+	padding: 0;
 	font-size: 10px !important;
 	text-transform: uppercase;
 	letter-spacing: 2px !important;
+	line-height: 1 !important;;
 }
 .init {
 	height: 0;
