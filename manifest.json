@@ -1,0 +1,22 @@
+{
+	"manifest_version": 2,
+	"name": "New Tab",
+	"description": "Personalized Tab",
+	"version": "0.9",
+	"author": "Kafi Rashid",
+	"browser_action": {
+		"default_icon": "images/fav.png",
+		"default_title": "New Tab"
+	},
+	"chrome_url_overrides" : {
+		"newtab": "newtab.html"
+	},
+	"permissions": [
+		"activeTab",
+		"tabs",
+		"topSites",
+		"storage",
+		"bookmarks"
+	]
+	// "content_security_policy": "script-src 'self' https://*.firebaseio.com; object-src 'self'"
+}

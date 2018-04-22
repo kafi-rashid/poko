@@ -1,0 +1,250 @@
+/*
+	https://kafi-rashid.github.io/
+	Owner: kafi.rashid@gmail.com
+*/
+@font-face {
+	font-family: 'SolaimanLipi';
+	src: url('../fonts/SolaimanLipi.eot');
+	src: url('../fonts/SolaimanLipi.woff') format('woff'),
+		url('../fonts/SolaimanLipi.ttf') format('truetype'),
+		url('../fonts/SolaimanLipi.svg#SolaimanLipiNormal') format('svg'),
+		url('../fonts/SolaimanLipi.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+	unicode-range: U+0980-007F;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, 0.6);
+	text-shadow: none;
+}
+* {
+	box-sizing: border-box;
+	vertical-align: top;
+	font-family: 'Open Sans', 'SolaimanLipi', sans-serif;
+	color: #FFF;
+	font-size: 13px;
+	font-weight: 300;
+}
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+body {
+	background-color: #202020;
+	background-image: url('../images/unsplash.jpg');
+	background-image: url('https://source.unsplash.com/collection/2013372/1920x1080'), url('../images/unsplash.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.blur-wrapper {
+	overflow: hidden;
+	position: absolute;
+	top: 98px;
+	left: 35px;
+	width: 360px;
+}
+.blur {
+	border: thin dashed red;
+	background-image: url('../images/unsplash.jpg');
+	background-image: url('https://source.unsplash.com/collection/2013372/1920x1080'), url('../images/unsplash.jpg');
+	background-repeat: no-repeat;
+	background-position: calc(50% - 8px) calc(50% + 55px);
+	background-size: cover;
+	background-attachment: fixed;
+	overflow: hidden;
+	filter: blur(10px) grayscale(0%) brightness(150%) sepia(30%);
+	position: absolute;
+	margin: -30px;
+	height: calc(100% + 60px) !important;
+	width: calc(100% + 60px);
+}
+.border {
+	border: thin solid red;
+}
+p, span, a {
+	/*text-shadow: 1px 1px 1px gray;*/
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+}
+#shadow {
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 95px;
+	width: 100%;
+	background: transparent;
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,0.5)), color-stop(100%, transparent));
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%, transparent 100%);
+}
+#content {
+	position: absolute;
+	z-index: 2;
+	min-height: 100vh;
+	width: 100vw;
+	left: 0;
+	top: 0;
+	padding: 35px;
+}
+#clear {
+	font-size: 11px;
+	background-color: transparent;
+	text-transform: uppercase;
+	padding: 5px 10px;
+	border: none;
+	line-height: 1;
+	position: absolute;
+	z-index: 999;
+	bottom: 10px;
+	right: 10px;
+	outline: none;
+	color: white;
+	transition: 0.3s;
+	cursor: pointer;
+	letter-spacing: 1px;
+	line-height: 1;
+}
+#clear:hover {
+	background-color: black;
+	color: white;
+}
+#now-day, #now-date {
+	line-height: 1;
+	letter-spacing: 3px;
+	padding: 0;
+	margin: 1px 1px 1px 0;
+	text-transform: uppercase;
+}
+#bookmarks {
+	width: calc(100% - 300px);
+	text-align: right;
+	position: absolute;
+	top: 35px;
+	right: 35px;
+}
+#bookmarks a {
+	color: #FFF;
+	letter-spacing: 1px;
+	line-height: 1;
+	padding: 0 10px;
+}
+#bookmarks a:last-of-type {
+	border-right: none;
+	padding-right: 0;
+}
+#most_visited {
+	display: none;
+	border-right: 2px solid #FFF;
+	padding-right: 10px;
+	position: absolute;
+	bottom: 35px;
+	right: 35px;
+	text-align: right;
+}
+#most_visited a {
+	color: #FFF;
+	letter-spacing: 1px;
+	line-height: 1;
+}
+#most_visited p {
+	line-height: 1;
+	margin-bottom: 5px;
+}
+#most_visited p:last-of-type {
+	margin-bottom: 0;
+}
+#notes, #notes * {
+	letter-spacing: 0.2px;
+}
+#notes-container {
+	overflow: hidden;
+	margin-top: 35px;
+	position: relative;
+	width: 360px;
+	max-height: calc(100vh - 130px);
+}
+#notes {
+	width: 360px;
+	max-height: calc(100vh - 210px);
+	overflow: scroll;
+}
+#add_note {
+	margin-top: -18px;
+	width: 100%;
+}
+.mCSB_inside > .mCSB_container {
+	margin-right: 20px;
+}
+.note p {
+	/*text-shadow: 1px 1px 1px black;*/
+	line-height: 1.1;
+}
+.note {
+	/*border-radius: 5px;*/
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.4);
+	margin-bottom: 1px;
+	padding: 10px;
+	overflow: hidden;
+}
+.note:first-of-type {
+	margin-bottom: 0 !important ;
+}
+
+[type="checkbox"]+span:not(.lever):before, [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+	border-color: white;
+}
+[type="checkbox"]:checked+span:not(.lever):before {
+	border-bottom-color: white;
+	border-right-color: white;
+}
+#input_note {
+	line-height: 1.1;
+	width: 100%;
+	letter-spacing: 0.2px;
+	resize: none;
+	outline: none;
+	margin-top: 1px;
+	font-weight: 100;
+	padding: 10px;
+	border: none;
+	background-color: rgba(0, 0, 0, 0.6);
+	min-height: 65px;
+	/*text-shadow: 1px 1px 1px black;*/
+}
+#add {
+	width: 100%;
+	border: none;
+	padding: 8px;
+	line-height: 1;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.6);
+	transition: 0.3s;
+	cursor: pointer;
+	outline: none;
+}
+#add:hover {
+	background-color: rgba(0, 0, 0, 1);
+}
+.time {
+	margin-top: 10px;
+	font-size: 10px !important;
+	text-transform: uppercase;
+	letter-spacing: 2px !important;
+}
+.init {
+	height: 0;
+	width: 0;
+	margin: 0;
+	padding: 0;
+}

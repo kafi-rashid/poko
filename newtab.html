@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Tab</title>
+	<meta charset="utf-8">
+	<meta name="author" content="Kafi Rashid">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400" rel="stylesheet">
+	<link rel="icon" href="images/fav.png" type="image/x-icon">
+	<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+	<button id="clear">Clear Notes</button>
+	<div id="shadow"></div>
+	<div id="content">
+		<div id="now">
+			<p id="now-day"></p>
+			<p id="now-date"></p>
+		</div>
+		<div id="bookmarks"></div>
+		<div class="blur-wrapper">
+			<div class="blur"></div>
+		</div>
+		<div id="notes-container" class="">
+			<div id="notes">
+				<div class="note init">
+				</div>
+			</div>
+			<div id="add_note">
+				<textarea id="input_note" autocomplete="off" placeholder="Add note..."></textarea>
+				<button id="add">+</button>
+			</div>
+		</div>		
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/main.js"></script>
+	<style>
+		body {
+			/*background-image: url('https://source.unsplash.com/collection/2013372/1920x1080'), url('images/unsplash.jpg');*/
+		}
+		.blur {
+			/*background-image: url('https://source.unsplash.com/collection/2013372/1920x1080'), url('images/unsplash.jpg');*/
+		}
+	</style>
+</body>
+</html>
