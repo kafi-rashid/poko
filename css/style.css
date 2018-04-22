@@ -191,15 +191,17 @@ a {
 	line-height: 1.1;
 }
 .note {
+	position: relative;
 	/*border-radius: 5px;*/
 	cursor: pointer;
 	background-color: rgba(0, 0, 0, 0.4);
 	margin-bottom: 1px;
 	padding: 20px;
 	overflow: hidden;
+	transition: 0.3s;
 }
 .note:first-of-type {
-	margin-bottom: 0 !important ;
+	/*margin-bottom: 0 !important ;*/
 }
 
 [type="checkbox"]+span:not(.lever):before, [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
@@ -244,10 +246,46 @@ a {
 	text-transform: uppercase;
 	letter-spacing: 2px !important;
 	line-height: 1 !important;;
+	color: rgba(255, 255, 255, 0.5);
 }
 .init {
 	height: 0;
 	width: 0;
 	margin: 0;
 	padding: 0;
+}
+.hidden {
+	display: none;
+}
+.option-container {
+	z-index: 2;
+	/*border: thin dashed red;*/
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.5);
+	transition: 0.5s;
+	opacity: 0;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+.option-container p {
+	width: 100%;
+	letter-spacing: 2px !important;
+	text-transform: uppercase;
+	line-height: 1;
+	padding: 0;
+	margin: 0;
+}
+.note:hover > .option-container {
+	opacity: 1;
+}
+.note:hover > p {
+	filter: blur(2px);
+}
+.new-note {
+	/*background-color: rgba(0, 0, 0, 0.7);*/
 }

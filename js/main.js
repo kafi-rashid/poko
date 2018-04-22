@@ -12,7 +12,6 @@ function clearNotes() {
 	    }
 	});
 }
-
 $(document).ready(function() {
 
 	// TRIGGERING BUTTON
@@ -59,8 +58,21 @@ $(document).ready(function() {
 
 document.body.onload = function() {
 
+	// PROTOTYPES
+	String.prototype.replaceArray = function(find, replace) {
+		var replaceString = this;
+		var regex; 
+		for (var i = 0; i < find.length; i++) {
+			regex = new RegExp(find[i], "g");
+			replaceString = replaceString.replace(regex, replace[i]);
+		}
+		return replaceString;
+	};
+	var find = ["<", ">"];
+	var replace = ["&lt;", "&gt;"];;
+
 	// INIT
-	adjustHeight();
+	adjustHeight()
 
 	// NOTES
 	var notes_container = $('#notes').find('.note').parent().attr('id').toString();
@@ -69,22 +81,23 @@ document.body.onload = function() {
 		dataVersion: 3,
 		villages: []
 	};
-	$('#add').click(function() {		
+	$('#add').click(function() {
 		if ($('#input_note').val().replace(/\s/g, '').length) {
 			let d = new Date();
 			let randval = Math.ceil(Math.random() * 999999);
 			let time = new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + ' · ' + d.getMonthName() + ' ' + d.getDate()  + ', ' + d.getFullYear();
-			let note = $('#input_note').val();
+			let note = $('#input_note').val().replaceArray(find, replace);
 			gData.villages.push(
 				{id: randval, time: time, name: note}
 			);
 			DB_save();
-			$('#'+notes_container).append('<div class="note"><id id="'+ randval +'"></id><p>'+ note +'<p class="time">'+ time +'</p></p></div>');
+			$('#'+notes_container).prepend('<div class="note new-note hidden"><div class="option-container"><p>Delete Note</p></div><id id="'+ randval +'"></id><p>'+ note +'<p class="time">'+ time +'</p></p></div>');
 			$('#input_note').val('').focus();
+			$('.new-note').fadeIn('slow');
 		}
 		adjustHeight();
 		delNote();
-		$('#notes').scrollTop($('#notes')[0].scrollHeight);
+		// $('#notes').scrollTop($('#notes')[0].scrollHeight);
 	});
 	function DB_setValue(name, value, callback) {
 		var obj = {};
@@ -126,7 +139,7 @@ document.body.onload = function() {
 	}
 	DB_load(function() {
 		for (var i = 0; i < gData.villages.length; i++) {
-			$('#'+notes_container).append('<div class="note"><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+			$('#'+notes_container).prepend('<div class="note"><div class="option-container"><p>Delete Note</p></div><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
 		}
 		adjustHeight();
 		delNote();
