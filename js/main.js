@@ -12,6 +12,7 @@ function clearNotes() {
 	    }
 	});
 }
+
 $(document).ready(function() {
 
 	// TRIGGERING BUTTON
@@ -58,6 +59,9 @@ $(document).ready(function() {
 
 document.body.onload = function() {
 
+	// INIT
+	adjustHeight();
+
 	// PROTOTYPES
 	String.prototype.replaceArray = function(find, replace) {
 		var replaceString = this;
@@ -70,9 +74,6 @@ document.body.onload = function() {
 	};
 	var find = ["<", ">"];
 	var replace = ["&lt;", "&gt;"];;
-
-	// INIT
-	adjustHeight()
 
 	// NOTES
 	var notes_container = $('#notes').find('.note').parent().attr('id').toString();
@@ -88,15 +89,20 @@ document.body.onload = function() {
 			let time = new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + ' · ' + d.getMonthName() + ' ' + d.getDate()  + ', ' + d.getFullYear();
 			let note = $('#input_note').val().replaceArray(find, replace);
 			gData.villages.push(
-				{id: randval, time: time, name: note}
+				{id: randval, time: time, name: note, stat: 'init'}
 			);
 			DB_save();
-			$('#'+notes_container).prepend('<div class="note new-note hidden"><div class="option-container"><p>Delete Note</p></div><id id="'+ randval +'"></id><p>'+ note +'<p class="time">'+ time +'</p></p></div>');
+			$('#'+notes_container).prepend('<div class="note new-note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option arc">Archive</button></div></div><id id="'+ randval +'"></id><p>'+ note +'<p class="time">'+ time +'</p></p></div>');
 			$('#input_note').val('').focus();
-			$('.new-note').fadeIn('slow');
+			setTimeout(function() {
+				$('.new-note').css({
+					'box-shadow': 'unset',
+					'background-color': 'rgba(0, 0, 0, 0.4)'
+				});
+			}, 500);
 		}
 		adjustHeight();
-		delNote();
+		noteStat();
 		// $('#notes').scrollTop($('#notes')[0].scrollHeight);
 	});
 	function DB_setValue(name, value, callback) {
@@ -139,23 +145,53 @@ document.body.onload = function() {
 	}
 	DB_load(function() {
 		for (var i = 0; i < gData.villages.length; i++) {
-			$('#'+notes_container).prepend('<div class="note"><div class="option-container"><p>Delete Note</p></div><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+			if (gData.villages[i].stat.toString() != 'arc') {
+				$('#'+notes_container).prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option arc">Archive</button></div></div><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+			}
+			else {
+				$('#'+notes_container).prepend('<div class="note archived"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option unarc">Unarchive</button></div></div><id id="'+ gData.villages[i].id +'"></id><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+			}
 		}
 		adjustHeight();
-		delNote();
+		noteStat();
 	});
-	function delNote() {
-		$('.note').click(function() {
-			$(this).fadeOut('slow');
-			setTimeout(function() {
-				adjustHeight();
-			}, 650);
-			for (var i = 0; i < gData.villages.length; i++) {
-				if (gData.villages[i].id === parseInt($(this).find('id').attr('id'))) {
-					gData.villages.splice(i, 1);
+	function noteStat() {
+		$('.option').click(function() {
+			let noteId = parseInt($(this).closest('.note').find('id').attr('id'));
+			if ($(this).hasClass('del')) {
+				$(this).html('Deleting');
+				$(this).closest('.note').fadeOut('slow');
+				setTimeout(function() {
+					adjustHeight();
+				}, 650);
+				for (var i = 0; i < gData.villages.length; i++) {
+					if (gData.villages[i].id === noteId) {
+						gData.villages.splice(i, 1);
+					}
 				}
+			}
+			else if($(this).hasClass('arc')) {
+				$(this).html('Unarchive').removeClass('arc');
+				for (var i = 0; i < gData.villages.length; i++) {
+					if (gData.villages[i].id === noteId) {
+						gData.villages[i].stat = 'arc';
+					}
+				}
+				$(this).closest('.note').find('p').not('.time').css('text-decoration', 'line-through');
+			}
+			else {
+				$(this).html('Archive').addClass('arc');
+				for (var i = 0; i < gData.villages.length; i++) {
+					if (gData.villages[i].id === noteId) {
+						gData.villages[i].stat = 'init';
+					}
+				}
+				$(this).closest('.note').find('p').not('.time').css('text-decoration', 'unset');
 			}
 			DB_save();
 		});
 	}
+
+	$('body, .blur').css("background-image", "-webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('https://source.unsplash.com/collection/2013372/1920x1080')");
+
 }
