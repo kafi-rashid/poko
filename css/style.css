@@ -51,6 +51,9 @@
 	color: rgba(255, 255, 255, 0.5);
 	font-size: 35px;
 }
+::selection {
+  	background: transparent;
+}
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
@@ -170,7 +173,7 @@ a {
 }
 #blur {
 	background-repeat: no-repeat;
-	background-position: calc(50% + 2px) calc(50% + 20px);
+	background-position: calc(50% + 2px) calc(50% + 50px);
 	background-size: cover;
 	background-attachment: fixed;
 	overflow: hidden;
@@ -203,7 +206,6 @@ a {
 	margin-right: 20px;
 }
 .note p {
-	/*text-align: justify;*/
 	line-height: 1.3;
 }
 .note {

@@ -56,9 +56,11 @@ $(document).ready(function() {
 
 	// ARCHIVE LIBRARY
 	$('#archive').click(function() {
+		$(this).hide();
 		$('.dark-bg').fadeIn('fast');
 	});
 	$('#close, #content').click(function() {
+		$('#archive').show();
 		$('.dark-bg').fadeOut('fast');
 	});
 
@@ -170,6 +172,15 @@ document.body.onload = function() {
 		noteStat();
 	});
 	function noteStat() {
+		// COPY 
+		// $('.option-container').click(function() {
+		// 	var $temp = $("<input>");
+		// 	$("body").append($temp);
+		// 	$temp.val($(this).closest('.note').find('p').not('.time').text()).select();
+		// 	document.execCommand("copy");
+		// 	alert($temp.val());
+		// 	$temp.remove();
+		// });
 		$('.option').click(function() {
 			let noteId = parseInt($(this).closest('.note').find('id').attr('id'));
 			if ($(this).hasClass('del')) {
