@@ -197,6 +197,10 @@ document.body.onload = function() {
 					adjustHeight();
 				}, 550);
 				$('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option unarc">Unarchive</button></div></div><id id="'+ parseInt($(this).closest('.note').find('id')) +'"></id><i class="material-icons quote">format_quote</i><p>'+ $(this).closest('.note').find('p').not('.time').text() +'<p class="time">'+ $(this).closest('.note').find('.time').text() + '</p></p></div>');
+				$('#archive').addClass('bounceIn');
+				setTimeout(function() {
+					$('#archive').removeClass('bounceIn');
+				}, 1000);
 			}
 			else if($(this).hasClass('chk')) {
 				$(this).html('Mark Not Done').removeClass('chk').addClass('unc');
