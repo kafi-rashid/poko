@@ -13,6 +13,44 @@
 	font-style: normal;
 	unicode-range: U+0980-007F;
 }
+@font-face {
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Material Icons'),
+	local('MaterialIcons-Regular'),
+	url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+	url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+	url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+.material-icons {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 18px;
+	display: inline-block;
+	line-height: 0.9;
+	margin-right: 5px;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: 'liga';
+}
+.quote {
+	margin: 0;
+	padding: 0;
+	line-height: 0.5;
+	float: right;
+	margin-right: -15px;
+	margin-top: -7px;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 35px;
+}
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
@@ -38,32 +76,8 @@ html, body {
 }
 body {
 	background-color: #202020;
-	/*background-image: url('../images/unsplash.jpg');*/
-	/*background-image: url('https://source.unsplash.com/collection/2013372/1920x1080'), url('../images/unsplash.jpg');*/
 	background-repeat: no-repeat;
 	background-size: cover;
-}
-.blur-wrapper {
-	overflow: hidden;
-	position: absolute;
-	top: 98px;
-	left: 35px;
-	width: 360px;
-}
-.blur {
-	border: thin dashed red;
-	/*background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('../images/unsplash.jpg');*/
-	/*background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('https://source.unsplash.com/collection/2013372/1920x1080'), url('../images/unsplash.jpg');*/
-	background-repeat: no-repeat;
-	background-position: calc(50% + 2px) calc(50% + 20px);
-	background-size: cover;
-	background-attachment: fixed;
-	overflow: hidden;
-	filter: blur(10px) grayscale(0%) brightness(150%) sepia(0%);
-	position: absolute;
-	margin: -30px;
-	height: calc(100% + 60px) !important;
-	width: calc(100% + 60px);
 }
 .border {
 	border: thin solid red;
@@ -96,6 +110,7 @@ a {
 	padding: 35px;
 }
 #clear {
+	display: none;
 	font-size: 11px;
 	background-color: transparent;
 	text-transform: uppercase;
@@ -144,27 +159,52 @@ a {
 #notes, #notes * {
 	letter-spacing: 0.2px;
 }
-#notes-container {
+#blur-wrapper {
+	overflow: hidden !important;
+	position: absolute;
+	top: 98px;
+	left: 35px;
+	width: 360px;
+	/*border: thin dashed white;*/
+	max-height: calc(100vh - 130px);
+}
+#blur {
+	background-repeat: no-repeat;
+	background-position: calc(50% + 2px) calc(50% + 20px);
+	background-size: cover;
+	background-attachment: fixed;
 	overflow: hidden;
-	margin-top: 35px;
-	position: relative;
+	filter: blur(10px) grayscale(0%) brightness(150%) sepia(0%);
+	position: absolute;
+	margin: -30px;
+	height: 100% !important;
+	height: calc(100% + 60px) !important;
+	width: calc(100% + 60px);
+}
+#notes-container {
+	overflow: hidden !important;
+	position: absolute;
 	width: 360px;
 	max-height: calc(100vh - 130px);
 }
 #notes {
 	width: 360px;
-	max-height: calc(100vh - 210px);
-	overflow: scroll;
+	max-height: calc(100vh - 239px);
+	overflow: auto;
+	margin: 0;
+	padding: 0;
 }
 #add_note {
-	margin-top: -17px;
 	width: 100%;
+	height: 95px;
+	position: relative;
 }
 .mCSB_inside > .mCSB_container {
 	margin-right: 20px;
 }
 .note p {
-	line-height: 1.1;
+	/*text-align: justify;*/
+	line-height: 1.3;
 }
 .note {
 	position: relative;
@@ -187,17 +227,17 @@ a {
 	border-right-color: white;
 }
 #input_note {
-	line-height: 1.1;
+	line-height: 1.3;
 	width: 100%;
 	letter-spacing: 0.2px;
 	resize: none;
 	outline: none;
-	margin-top: 1px;
+	/*margin-top: 1px;*/
 	font-weight: 100;
 	padding: 15px;
 	border: none;
 	background-color: rgba(0, 0, 0, 0.6);
-	min-height: 65px;
+	height: 66px;
 }
 #add {
 	width: 100%;
@@ -205,6 +245,7 @@ a {
 	padding: 8px;
 	line-height: 1;
 	color: white;
+	height: 29px;
 	background-color: rgba(0, 0, 0, 0.6);
 	transition: 0.3s;
 	cursor: pointer;
@@ -221,12 +262,6 @@ a {
 	letter-spacing: 2px !important;
 	line-height: 1 !important;;
 	color: rgba(255, 255, 255, 0.5);
-}
-.init {
-	height: 0;
-	width: 0;
-	margin: 0;
-	padding: 0;
 }
 .hidden {
 	display: none;
@@ -280,4 +315,88 @@ a {
 }
 .archived p:not(.time) {
 	text-decoration: line-through;
+}
+id {
+	display: none;
+}
+#archive {
+	background-color: transparent;
+	border: none;
+	color: white;
+	position: absolute;
+	z-index: 12;
+	bottom: 30px;
+	right: 30px;
+	outline: none;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+}
+#archive .material-icons {
+	font-size: 25px;
+	line-height: 1;
+	margin: 0;
+	padding: 0;
+	color: rgba(255, 255, 255, 0.6);
+	text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	transition: 0.3s;
+}
+#archive:hover > .material-icons {
+	color: rgba(255, 255, 255, 1);
+}
+.blur {
+	filter: blur(3px);
+}
+.dark-bg {
+	display: none;
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	height: calc(100vh - 30px);
+	width: 360px;
+	background-color: rgba(255, 255, 255, 0.9);
+	z-index: 100;
+}
+.dark-inner {
+	height: 100%;
+	width: 100%;
+}
+#close {
+	background-color: transparent;
+	border: none;
+	outline: none;
+	height: 40px;
+	width: 40px;
+	text-align: center;
+	cursor: pointer;
+	transition: 0.3s;
+	position: absolute;
+	right: 10px;
+	top: 7px;
+}
+#close:hover > .material-icons {
+	color: black;
+}
+#close .material-icons {
+	transition: 0.3s;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	font-size: 30px;
+	color: rgba(0, 0, 0, 0.3);
+}
+#archived-notes {
+	margin-top: 52px;
+	height: calc(100% - 46px);
+	width: 100%;
+	padding: 0 10px 0 10px;
+	overflow: scroll;
+}
+#archived-notes .note {
+	background-color: rgba(0, 0, 0, 0.7);
+	border-bottom: 0.5px solid white;
+	width: 100%;
+	/*height: calc(33.33333% - 1px);*/
+	/*width: calc(33.33333% - 1px);*/
+	display: inline-block;
 }

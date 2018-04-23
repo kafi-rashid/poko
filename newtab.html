@@ -10,28 +10,32 @@
 	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-	<button id="clear">Clear Notes</button>
 	<div id="shadow"></div>
+	<div class="dark-bg">
+		<div class="dark-inner">
+			<button id="close"><i class="material-icons">close</i></button>
+			<div id="archived-notes"></div>
+		</div>
+	</div>
 	<div id="content">
 		<div id="now">
 			<p id="now-day"></p>
 			<p id="now-date"></p>
 		</div>
 		<div id="bookmarks"></div>
-		<div class="blur-wrapper">
-			<div class="blur"></div>
-		</div>
-		<div id="notes-container" class="">
-			<div id="notes">
-				<div class="note init">
+		<div id="blur-wrapper">
+			<div id="blur"></div>
+			<div id="notes-container" class="">
+			<div id="notes"></div>
+			<div id="add_note">
+					<textarea id="input_note" autocomplete="off" placeholder="Write here..."></textarea>
+					<button id="add">+</button>
 				</div>
 			</div>
-			<div id="add_note">
-				<textarea id="input_note" autocomplete="off" placeholder="Write here..."></textarea>
-				<button id="add">+</button>
-			</div>
-		</div>		
+		</div>
 	</div>
+	<button id="clear">Clear Notes</button>
+	<button id="archive"><i class="material-icons">archive</i></button>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/main.js"></script>
 </body>
