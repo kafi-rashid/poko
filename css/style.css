@@ -312,7 +312,7 @@ a {
 .note:hover > .option-container {
 	opacity: 1;
 }
-.note:hover > p {
+.note:hover > p, .note:hover > i {
 	filter: blur(3px);
 }
 .new-note {
