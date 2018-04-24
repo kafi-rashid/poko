@@ -100,7 +100,6 @@ document.body.onload = function() {
 		villages: []
 	};
 	$(document).on('click', '#add', function(e) {
-	// $('#add').click(function() {
 		if ($('#input_note').val().replace(/\s/g, '').length) {
 			let d = new Date(), randval = Math.ceil(Math.random() * 999999), time = new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + ' · ' + d.getMonthName() + ' ' + d.getDate()  + ', ' + d.getFullYear(), note = $('#input_note').val().replaceArray(find, replace);
 			gData.villages.push({ 
@@ -183,7 +182,6 @@ document.body.onload = function() {
 		// 	$temp.remove();
 		// });
 		$(document).on('click', '.option', function(e) {
-		// $('.option').click(function() {
 			let noteId = parseInt($(this).closest('.note').find('id').attr('id'));
 			if ($(this).hasClass('del')) {
 				$(this).html('Deleting').closest('.note').fadeOut('slow');
