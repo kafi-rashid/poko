@@ -107,10 +107,10 @@ document.body.onload = function() {
 			});
 			DB_save();
 			if (type == 'note') {
-				$('#notes').prepend('<div class="note new-note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option arc">Archive</button></div></div><id id="'+ randval +'"></id><i class="material-icons quote">format_quote</i><p>'+ note +'<p class="time">'+ time +'</p></p></div>');
+				$('#notes').prepend('<div class="note new-note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option arc">Archive</button></div></div><id id="'+ randval +'"></id><i class="material-icons quote">format_quote</i><p>'+ note +'<p class="time">'+ time +'</p></p></div>');
 			}
 			else {
-				$('#notes').prepend('<div class="note new-note"><div class="option-container"><div class="options"><button class="option del">Delete Task</button><button class="option chk">Mark Done</button></div></div><id id="'+ randval +'"></id><p><i class="material-icons">check_box_outline_blank</i>'+ note +'</p></div>');
+				$('#notes').prepend('<div class="note new-note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option chk">Check</button></div></div><id id="'+ randval +'"></id><p><i class="material-icons">check_box_outline_blank</i>'+ note +'</p></div>');
 			}
 			$('#input_note').val('').focus();
 			setTimeout(function() {
@@ -123,6 +123,7 @@ document.body.onload = function() {
 		adjustHeight();
 		noteStat();
 		type = 'note';
+		$('#notes').scrollTop(0);
 	});
 	function DB_setValue(name, value, callback) {
 		var obj = {};
@@ -160,12 +161,12 @@ document.body.onload = function() {
 	DB_load(function() {
 		for (var i = 0; i < gData.villages.length; i++) {
 			if (gData.villages[i].type.toString() == 'note') {
-				if (gData.villages[i].stat.toString() != 'arc') $('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option arc">Archive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
-				else $('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option unarc">Unarchive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+				if (gData.villages[i].stat.toString() != 'arc') $('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option arc">Archive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+				else $('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unarc">Unarchive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
 			}
 			else {
-				if (gData.villages[i].stat.toString() != 'chk') $('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Task</button><button class="option chk">Mark Done</button></div></div><id id="'+ gData.villages[i].id +'"></id><p><i class="material-icons">check_box_outline_blank</i>'+ gData.villages[i].name +'</p></div>');
-				else $('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Task</button><button class="option unc">Mark Not Done</button></div></div><id id="'+ gData.villages[i].id +'"></id><p><i class="material-icons">check_box</i>'+ gData.villages[i].name +'</p></div>');
+				if (gData.villages[i].stat.toString() != 'chk') $('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option chk">Check</button></div></div><id id="'+ gData.villages[i].id +'"></id><p><i class="material-icons">check_box_outline_blank</i>'+ gData.villages[i].name +'</p></div>');
+				else $('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unc">UncheCk</button></div></div><id id="'+ gData.villages[i].id +'"></id><p><i class="material-icons">check_box</i>'+ gData.villages[i].name +'</p></div>');
 			}
 		}
 		adjustHeight();
@@ -206,21 +207,21 @@ document.body.onload = function() {
 				setTimeout(function() {
 					adjustHeight();
 				}, 550);
-				$('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option unarc">Unarchive</button></div></div><id id="'+ parseInt($(this).closest('.note').find('id')) +'"></id><i class="material-icons quote">format_quote</i><p>'+ $(this).closest('.note').find('p').not('.time').text() +'<p class="time">'+ $(this).closest('.note').find('.time').text() + '</p></p></div>');
+				$('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unarc">Unarchive</button></div></div><id id="'+ parseInt($(this).closest('.note').find('id')) +'"></id><i class="material-icons quote">format_quote</i><p>'+ $(this).closest('.note').find('p').not('.time').text() +'<p class="time">'+ $(this).closest('.note').find('.time').text() + '</p></p></div>');
 				$('#archive').addClass('bounceIn');
 				setTimeout(function() {
 					$('#archive').removeClass('bounceIn');
 				}, 1000);
 			}
 			else if($(this).hasClass('chk')) {
-				$(this).html('Mark Not Done').removeClass('chk').addClass('unc');
+				$(this).html('UncheCk').removeClass('chk').addClass('unc');
 				for (var i = 0; i < gData.villages.length; i++) {
 					if (gData.villages[i].id === noteId) gData.villages[i].stat = 'chk';
 				}
 				$(this).closest('.note').find('i').text('check_box');
 			}
 			else if($(this).hasClass('unc')) {
-				$(this).html('Mark Done').removeClass('unc').addClass('chk');
+				$(this).html('Check').removeClass('unc').addClass('chk');
 				for (var i = 0; i < gData.villages.length; i++) {
 					if (gData.villages[i].id === noteId) gData.villages[i].stat = 'unc';
 				}
@@ -230,7 +231,7 @@ document.body.onload = function() {
 				for (var i = 0; i < gData.villages.length; i++) {
 					if (gData.villages[i].id === noteId) {
 						gData.villages[i].stat = 'init';
-						$('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete Note</button><button class="option arc">Archive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+						$('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option arc">Archive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
 					}
 				}
 				$(this).closest('.note').hide();
