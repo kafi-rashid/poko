@@ -162,7 +162,7 @@ document.body.onload = function() {
 		for (var i = 0; i < gData.villages.length; i++) {
 			if (gData.villages[i].type.toString() == 'note') {
 				if (gData.villages[i].stat.toString() != 'arc') $('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option arc">Archive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
-				else $('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unarc">Unarchive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
+				else $('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unarc_arc">Unarchive</button></div></div><id id="'+ gData.villages[i].id +'"></id><i class="material-icons quote">format_quote</i><p>'+ gData.villages[i].name +'<p class="time">'+ gData.villages[i].time + '</p></p></div>');
 			}
 			else {
 				if (gData.villages[i].stat.toString() != 'chk') $('#notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option chk">Check</button></div></div><id id="'+ gData.villages[i].id +'"></id><p><i class="material-icons">check_box_outline_blank</i>'+ gData.villages[i].name +'</p></div>');
@@ -193,7 +193,7 @@ document.body.onload = function() {
 				}
 			}
 			else if($(this).hasClass('arc')) {
-				$(this).html('Unarchive').removeClass('arc');
+				$(this).html('Unarchive').addClass('unarc');
 				let spNote = $(this).closest('.note');
 				for (var i = 0; i < gData.villages.length; i++) {
 					if (gData.villages[i].id === noteId) gData.villages[i].stat = 'arc';
@@ -203,15 +203,16 @@ document.body.onload = function() {
 					'filter': 'blur(0)'
 				});
 				$(this).closest('.option-container').hide().delay(300);
-				spNote.fadeOut(500);
 				setTimeout(function() {
 					adjustHeight();
 				}, 550);
-				$('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unarc">Unarchive</button></div></div><id id="'+ parseInt(noteId) +'"></id><i class="material-icons quote">format_quote</i><p>'+ $(this).closest('.note').find('p').not('.time').text() +'<p class="time">'+ $(this).closest('.note').find('.time').text() + '</p></p></div>');
+				$('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unarc_arc">Unarchive</button></div></div><id id="'+ parseInt(noteId) +'"></id><i class="material-icons quote">format_quote</i><p>'+ $(this).closest('.note').find('p').not('.time').text() +'<p class="time">'+ $(this).closest('.note').find('.time').text() + '</p></p></div>');
 				$('#archive').addClass('bounceIn');
+				$(this).closest('.note').fadeOut(500);
 				setTimeout(function() {
 					$('#archive').removeClass('bounceIn');
 				}, 1000);
+				$(this).html('Unarchive').removeClass('arc');
 			}
 			else if($(this).hasClass('chk')) {
 				$(this).html('UncheCk').removeClass('chk').addClass('unc');
@@ -227,7 +228,7 @@ document.body.onload = function() {
 				}
 				$(this).closest('.note').find('i').text('check_box_outline_blank');
 			}
-			else {
+			else if($(this).hasClass('unarc_arc')) {
 				for (var i = 0; i < gData.villages.length; i++) {
 					if (gData.villages[i].id === noteId) {
 						gData.villages[i].stat = 'init';
@@ -236,6 +237,7 @@ document.body.onload = function() {
 				}
 				$(this).closest('.note').hide();
 				adjustHeight();
+				$(this).removeClass('unarc_arc');
 			}
 			DB_save();
 		});
