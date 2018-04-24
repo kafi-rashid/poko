@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "New Tab",
-	"description": "Personalized Tab",
+	"description": "Keep your notes and tasks in PokoTab.",
 	"version": "0.9",
 	"author": "Kafi Rashid",
 	"browser_action": {
