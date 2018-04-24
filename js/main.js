@@ -176,9 +176,8 @@ document.body.onload = function() {
 		// $('.option-container').click(function() {
 		// 	var $temp = $("<input>");
 		// 	$("body").append($temp);
-		// 	$temp.val($(this).closest('.note').find('p').not('.time').text()).select();
+		// 	$temp.val($(this).closest('.note').find('p').not('.time').text().replace('check_box_outline_blank', '').replace('check_box', '')).select();
 		// 	document.execCommand("copy");
-		// 	alert($temp.val());
 		// 	$temp.remove();
 		// });
 		$('.option').click(function() {
