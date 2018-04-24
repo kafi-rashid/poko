@@ -52,7 +52,10 @@
 	font-size: 35px;
 }
 ::selection {
-  	/*background: transparent;*/
+  	background: transparent;
+}
+#input_note::selection {
+  	background: rgba(0, 0, 0, 1);
 }
 ::-webkit-scrollbar {
     width: 0px;
@@ -447,8 +450,8 @@ id {
 	}
 }
 .bounceIn {
-	-webkit-animation-duration: 0.75s;
-	animation-duration: 0.75s;
+	-webkit-animation-duration: 1.5s;
+	animation-duration: 1.5s;
 	-webkit-animation-name: bounceIn;
 	animation-name: bounceIn;
 }

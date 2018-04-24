@@ -99,7 +99,8 @@ document.body.onload = function() {
 		dataVersion: 3,
 		villages: []
 	};
-	$('#add').click(function() {
+	$(document).on('click', '#add', function(e) {
+	// $('#add').click(function() {
 		if ($('#input_note').val().replace(/\s/g, '').length) {
 			let d = new Date(), randval = Math.ceil(Math.random() * 999999), time = new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + ' · ' + d.getMonthName() + ' ' + d.getDate()  + ', ' + d.getFullYear(), note = $('#input_note').val().replaceArray(find, replace);
 			gData.villages.push({ 
@@ -181,7 +182,8 @@ document.body.onload = function() {
 		// 	document.execCommand("copy");
 		// 	$temp.remove();
 		// });
-		$('.option').click(function() {
+		$(document).on('click', '.option', function(e) {
+		// $('.option').click(function() {
 			let noteId = parseInt($(this).closest('.note').find('id').attr('id'));
 			if ($(this).hasClass('del')) {
 				$(this).html('Deleting').closest('.note').fadeOut('slow');
@@ -207,7 +209,7 @@ document.body.onload = function() {
 				setTimeout(function() {
 					adjustHeight();
 				}, 550);
-				$('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unarc">Unarchive</button></div></div><id id="'+ parseInt($(this).closest('.note').find('id')) +'"></id><i class="material-icons quote">format_quote</i><p>'+ $(this).closest('.note').find('p').not('.time').text() +'<p class="time">'+ $(this).closest('.note').find('.time').text() + '</p></p></div>');
+				$('#archived-notes').prepend('<div class="note"><div class="option-container"><div class="options"><button class="option del">Delete</button><button class="option unarc">Unarchive</button></div></div><id id="'+ parseInt(noteId) +'"></id><i class="material-icons quote">format_quote</i><p>'+ $(this).closest('.note').find('p').not('.time').text() +'<p class="time">'+ $(this).closest('.note').find('.time').text() + '</p></p></div>');
 				$('#archive').addClass('bounceIn');
 				setTimeout(function() {
 					$('#archive').removeClass('bounceIn');
